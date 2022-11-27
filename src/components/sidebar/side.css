@@ -1,0 +1,79 @@
+.container{
+    background-color: aliceblue;
+    height: 100vh;
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    border-right: 0.5px solid rgb(228, 224, 224);
+    position: sticky;
+}
+
+.container .identity{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    margin-bottom: 0.4rem;
+    flex-direction: column;
+}
+
+.container .identity .logo1{
+    font-size: 20px;
+    font-weight: 700;
+    color: crimson;
+}
+.container .identity .logo2{
+    font-size: 15px;
+    font-weight: 700;
+    color: green;
+}
+.container .identity img{
+    max-width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.container ul{
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-left: 1rem;
+    flex-direction: column;
+
+}
+.container ul li {
+    margin-top: 1rem;
+}
+.container ul li span {
+    margin-top: 1rem;
+    margin-left: 0.8rem;
+    font-size: large;
+    font-weight: 500;
+    
+}
+.container ul :hover {
+    cursor: pointer;
+    background-color: rgb(234, 241, 248);
+    
+}
+.container hr {
+    height: 0;
+        border: 0.5px solid rgb(228, 224, 224);
+
+}
+.container .icon{
+    width: 25px;
+    border: none;
+    background-color:lightseagreen;
+    border-radius: 50%;
+    color: white;
+    margin-top: 0.1rem;
+}
+.container ul  .titles{
+    display: flex;
+    color: grey;
+    font-size: 15px;
+
+}
