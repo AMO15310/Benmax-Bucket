@@ -1,6 +1,10 @@
-import "./home.css";
+import "./home.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import Widget from "../../components/widgets/Widgets";
+import Featured from "../../components/featured/Featured";
+import Chart from "../../components/chart/Chart";
+import List from "../../components/table/Table";
 
 function Home() {
   return (
@@ -12,7 +16,24 @@ function Home() {
         <div className="nav">
           <Navbar />
         </div>
-        <div className="others">Dashboard</div>
+        <div className="others">
+          <div className="widgets">
+            <Widget type="Client" />
+            <Widget type="Bills" />
+            <Widget type="Paid" />
+            <Widget type="Balances" />
+          </div>
+          <div className="charts">
+            <Featured />
+            <Chart />
+          </div>
+          <div className="listContainer">
+            <div className="listTitle">Latest transactions</div>
+            <div className="lists">
+              <List />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

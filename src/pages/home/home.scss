@@ -1,0 +1,43 @@
+.dashb{
+    display: flex;
+    /* flex: 6; */
+    /* padding-left: 3rem; */
+    
+}
+.dashb .TopandDown .nav {
+    display: flex;
+    width: 100%;
+}
+
+
+.dashb .common{
+    display: flex;
+    flex: 1;
+}
+.dashb .TopandDown{
+    display: flex;
+    flex: 6;
+    flex-direction: column;
+}
+
+.widgets , .charts{
+    display: flex;
+    gap:2rem;
+    padding: 4rem;
+    flex: 1;
+}
+.charts{
+    padding: 5px 20px;
+}
+.listContainer{
+    box-shadow: -10px 18px 5px 4px rgba(0, 0, 0, 0.36);
+    -webkit-box-shadow: -10px 18px 5px 4px rgba(0, 0, 0, 0.36);
+    padding: 20px;
+    margin: 20px;
+
+    .listTitle{
+        font-weight: 500;
+        color: gray;
+        margin-bottom: 15px;
+    }
+}

@@ -1,0 +1,15 @@
+.single{
+    display: flex;
+    
+    .common{
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        height: 100vh;
+    }
+    .TopandDown{
+        display: flex;
+        flex-direction: column;
+        flex: 6;
+    }
+}
