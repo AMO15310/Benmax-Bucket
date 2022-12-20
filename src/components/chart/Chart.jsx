@@ -21,7 +21,7 @@ const data = [
   { name: "June", Total: 14000 },
 ];
 
-const Chart = () => {
+const Chart = ({ aspect, title }) => {
   return (
     <div className="charts">
       {/* <p className="title">Last 6 months Income</p> */}

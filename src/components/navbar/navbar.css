@@ -11,6 +11,8 @@
 
 .navigation .icons {
     margin-top: 0.5rem;
+    margin-right: 0.3rem;
+    cursor: pointer;
 }
 .navigation .right {
     display: flex;

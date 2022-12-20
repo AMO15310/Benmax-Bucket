@@ -55,8 +55,11 @@
 }
 .container ul :hover {
     cursor: pointer;
-    background-color: rgb(234, 241, 248);
     
+}
+.container ul li :hover {
+    background-color: rgb(234, 241, 248);
+
 }
 .container hr {
     height: 0;
