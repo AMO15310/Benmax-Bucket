@@ -4,6 +4,8 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
 import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
 import "./widgets.scss";
+import { Link } from "react-router-dom";
+import { color } from "@mui/system";
 
 const Widget = ({ type }) => {
   let data;
@@ -78,7 +80,9 @@ const Widget = ({ type }) => {
           <span className="counter">
             {data.isMoney && "Ksh"} {data.amount}
           </span>
-          <span className="link">{data.link}</span>
+          <Link to="/users" style={{ textDecoration: "none", color: "#999" }}>
+            <span className="link">{data.link} </span>
+          </Link>
         </div>
         <div className="right">
           <div className="percentage positive">

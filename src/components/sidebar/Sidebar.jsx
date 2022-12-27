@@ -1,4 +1,4 @@
-import "./side.css";
+import "./side.scss";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
 import GroupOutlinedIcon from "@mui/icons-material/GroupOutlined";
@@ -64,10 +64,12 @@ function Sidebar() {
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
-          <li>
-            <LogoutOutlinedIcon className="icon" />
-            <span>Log out</span>
-          </li>
+          <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
+            <li>
+              <LogoutOutlinedIcon className="icon" />
+              <span>Log out</span>
+            </li>
+          </Link>
         </ul>
       </div>
     </>

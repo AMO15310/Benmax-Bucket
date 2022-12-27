@@ -1,0 +1,84 @@
+ .logs{
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    box-sizing: 0;
+    .loginform{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin-top: 4rem;
+        border: 1px solid black;
+        padding: 5rem 4rem;
+        padding-bottom: 9rem;
+        border-radius: 4px;
+    }
+    .title{
+        font-size: 30px;
+    }
+    img{
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 12rem;
+    }
+    
+    .eye{
+        cursor: pointer;
+        margin-left: 0.5rem;
+    
+    }
+    .or{
+        display: flex;
+        justify-content: center;
+    }
+
+    input {
+        height: 1.7rem;
+        margin-bottom: 1rem;
+        &:focus{
+            outline: none;
+        }
+    }
+    button{
+        height: 2rem;
+        color: #fff;
+        background-color: rgb(44, 44, 136);
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: .2rem;
+        &:hover{
+            background-color: transparent;
+            color: rgb(7, 179, 7);
+            border: 1px solid aqua;
+
+        }
+    }
+    .haveone{
+        display: flex;
+        gap: 2px;
+        font-size: 14px;
+        justify-content: center;
+        margin-top: 17px;
+    }
+    .messages{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 12px;
+        align-items: center;
+        border: 1px solid crimson;
+        border-radius: 5px;
+        background-color: rgb(236, 162, 177);
+
+        .mess{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            padding:0px 3px;
+        }
+    }
+    
+} 
