@@ -8,18 +8,57 @@ import QueryStatsOutlinedIcon from "@mui/icons-material/QueryStatsOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import {
+  collection,
+  getDocs,
+  deleteDoc,
+  doc,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../../firebase-config";
+import { useState } from "react";
 
 function Sidebar() {
+  const [data, setData] = useState("");
+  try {
+  } catch (error) {}
+  const handleLogout = () => {
+    localStorage.clear();
+    // localStorage.removeItem("id");
+  };
+  useEffect(() => {
+    try {
+      const list = [];
+      const fetchData = async () => {
+        const querySnapshot = await getDocs(collection(db, "admin"));
+        querySnapshot.forEach((doc) => {
+          list.push({ id: doc.id, ...doc.data() });
+          // console.log(list[0]);
+
+          // doc.data() is never undefined for query doc snapshots
+        });
+        setData(list[0]);
+      };
+      fetchData();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
   return (
     <>
       <div className="container">
         <div className="identity">
           <Link to="/" style={{ textDecoration: "none" }}>
-            <p className="logo1">Amos W</p>
+            <p className="logo1">{data.name}</p>
           </Link>
           <img
-            src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt="profile img"
+            src={
+              data.image
+                ? data.image
+                : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+            }
+            alt="profile"
           />
           <p className="logo2">Admin</p>
         </div>
@@ -60,14 +99,20 @@ function Sidebar() {
             <QueryStatsOutlinedIcon className="icon" />
             <span>Stats</span>
           </li>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
+          <Link
+            to="/profile"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Profile</span>
+            </li>
+          </Link>
           <Link to="/login" style={{ textDecoration: "none", color: "black" }}>
             <li>
               <LogoutOutlinedIcon className="icon" />
-              <span>Log out</span>
+
+              <span onClick={() => handleLogout()}>Log out</span>
             </li>
           </Link>
         </ul>

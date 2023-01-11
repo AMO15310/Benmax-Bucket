@@ -7,8 +7,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../firebase-config";
 
 const List = () => {
   const rows = [
@@ -55,22 +53,6 @@ const List = () => {
       Status: "Settled",
     },
   ];
-
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          console.log(doc.id, " => ", doc.data());
-          console.log("executed");
-        });
-      };
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
   return (
     <TableContainer component={Paper} className="table">

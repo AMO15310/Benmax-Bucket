@@ -1,4 +1,5 @@
 import Home from "./pages/home/Home";
+import Update from "./pages/update/update";
 import "./App.css";
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -12,6 +13,17 @@ import Inputs from "./components/signup/inputs1";
 import LoginForm from "./components/login/login";
 import { AuthContext } from "./context/authContext";
 
+// import {
+//   collection,
+//   getDocs,
+//   deleteDoc,
+//   setDoc,
+//   doc,
+//   getDoc,
+// } from "firebase/firestore";
+// import { db } from "./firebase-config";
+import Admin from "./components/admin/Admin";
+
 function App() {
   const { darkMode } = useContext(darkModeContext);
 
@@ -20,6 +32,23 @@ function App() {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
+
+  // const getData = async () => {
+  //   try {
+  //     const newId = localStorage.getItem("id");
+
+  //     const docRef = doc(db, "users", newId);
+  //     const docSnap = await getDoc(docRef);
+
+  //     const clients = docSnap.data();
+  //     const newclients = Object.entries(clients);
+  //     localStorage.setItem("clients", newclients);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // getData();
+  // const users = localStorage.getItem("clients");
   return (
     <div className={darkMode ? "content dark" : "content"}>
       <BrowserRouter>
@@ -43,6 +72,14 @@ function App() {
             }
           />
           <Route
+            path="/users/:id/update"
+            element={
+              <RequireAuth>
+                <Update />
+              </RequireAuth>
+            }
+          />
+          <Route
             path="/users/:id"
             element={
               <RequireAuth>
@@ -55,6 +92,14 @@ function App() {
             element={
               <RequireAuth>
                 <New />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth>
+                <Admin />
               </RequireAuth>
             }
           />

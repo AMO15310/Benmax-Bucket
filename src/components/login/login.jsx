@@ -21,17 +21,6 @@ const LoginForm = () => {
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  // const handleEmailChange = (event) => {
-  //   setEmail({
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-  // const handlePassChange = (event) => {
-  //   setpassword({
-  //     [event.target.name]: event.target.value,
-  //   });
-  // };
-
   const hidepass = () => {
     setInputType("password");
   };

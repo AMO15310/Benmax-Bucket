@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
@@ -6,15 +6,18 @@ import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlin
 import "./widgets.scss";
 import { Link } from "react-router-dom";
 import { color } from "@mui/system";
+import { query, where, collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase-config";
+import { useState } from "react";
+import { Construction } from "@mui/icons-material";
 
 const Widget = ({ type }) => {
+  const [users, setUsers] = useState(null);
+  const [diff, setDiff] = useState(null);
+  const [bill, setBill] = useState(null);
+  const [paid, setPaid] = useState(null);
+  const [balance, setBalance] = useState(null);
   let data;
-
-  const balance = 6000;
-  const users = 120;
-  const bill = 13200;
-  const paid = 7200;
-  const diff = 25;
 
   switch (type) {
     case "Client":
@@ -72,6 +75,68 @@ const Widget = ({ type }) => {
     default:
       break;
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const today = new Date();
+      const lastMonth = new Date(new Date().setMonth(today.getMonth() - 1));
+      const prevMonth = new Date(new Date().setMonth(today.getMonth() - 2));
+      const lastMonthQuerry = query(
+        collection(db, "users"),
+        where("timeStamp", "<=", today),
+        where("timeStamp", ">", lastMonth)
+      );
+      const prevMonthQuerry = query(
+        collection(db, "users"),
+        where("timeStamp", "<=", lastMonth)
+        // where("timeStamp", ">", prevMonth)
+      );
+      const lastMonthData = await getDocs(lastMonthQuerry);
+      const prevMonthData = await getDocs(prevMonthQuerry);
+      setUsers(lastMonthData.docs.length);
+      setDiff(
+        ((lastMonthData.docs.length - prevMonthData.docs.length) /
+          prevMonthData.docs.length) *
+          100
+      );
+
+      const fetchData2 = async () => {
+        const array = [];
+        const array2 = [];
+        const balances = [];
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          array.push(doc.data().total);
+          const sumtotal = array.reduce(function (a, b) {
+            return a + b;
+          }, 0);
+          setBill(sumtotal);
+
+          const paidcash = Number(doc.data().paid_units);
+          array2.push(paidcash);
+          const sumpaid = array2.reduce(function (a, b) {
+            return a + b;
+          }, 0);
+          setPaid(sumpaid);
+
+          balances.push(doc.data().balance);
+          const sumbalances = balances.reduce(function (a, b) {
+            return a + b;
+          }, 0);
+          setBalance(sumbalances);
+
+          // console.log(array);
+
+          // list.push({ id: doc.id, ...doc.data() });
+
+          // doc.data() is never undefined for query doc snapshots
+        });
+      };
+      fetchData2();
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="widget">

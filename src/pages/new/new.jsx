@@ -12,6 +12,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
 function New() {
   const [file, setFile] = useState("");
@@ -26,8 +27,9 @@ function New() {
   const [Error1, setError1] = useState(false);
   const [Error2, setError2] = useState(false);
   const [Sent, setSent] = useState(false);
-  const [data, setData] = useState({});
+  const [user, setUser] = useState({});
   const [percentage, setPercentage] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const uploadFile = () => {
@@ -77,6 +79,7 @@ function New() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!Name || !Contact || !Final || !Initial || !Meter) {
       setError1(true);
       setTimeout(() => {
@@ -85,20 +88,24 @@ function New() {
       return;
     } else {
       try {
-        setData({
+        // setUser({});
+        const docRef = await addDoc(collection(db, "users"), {
           name: Name,
           contact: Contact,
           email: Email,
-          image: image,
+          image: image || null,
           final_units: Final,
           initial_units: Initial,
           paid_units: Paid,
           meter_number: Meter,
           consumed_units: Final - Initial,
           unit_cost: 120,
+          total: (Final - Initial) * 120,
+          balance: (Final - Initial) * 120 - Paid,
+          timeStamp: new Date(),
         });
-        const docRef = await addDoc(collection(db, "users"), { ...data });
         setSent(true);
+        navigate(-1);
         setTimeout(() => {
           setSent(false);
         }, 4000);
@@ -111,6 +118,7 @@ function New() {
       }
     }
   };
+
   return (
     <div className="new">
       <div className="common">
