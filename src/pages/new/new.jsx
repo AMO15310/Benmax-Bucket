@@ -105,7 +105,7 @@ function New() {
           timeStamp: new Date(),
         });
         setSent(true);
-        navigate(-1);
+        // navigate(-1);
         setTimeout(() => {
           setSent(false);
         }, 4000);
