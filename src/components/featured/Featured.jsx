@@ -5,7 +5,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { query, where, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 const Featured = () => {
@@ -29,11 +29,6 @@ const Featured = () => {
       const percPiad = Math.round((sumpaid / total) * 100);
 
       setPerc(percPiad);
-      //  setPaid(sumpaid);
-
-      // console.log(list);
-
-      // doc.data() is never undefined for query doc snapshots
     });
   };
   fetchData();

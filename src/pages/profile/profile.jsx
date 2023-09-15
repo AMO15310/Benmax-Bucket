@@ -124,10 +124,10 @@ function Profile(props) {
               <Chart aspect={3 / 1} title="Users revenue last 6 months" />
             </div>
           </div>
-          <div className="bottom">
+          {/* <div className="bottom">
             <h1 className="title">Last transactions</h1>
             <List />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

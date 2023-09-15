@@ -9,13 +9,7 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import { useState } from "react";
 
@@ -25,7 +19,6 @@ function Sidebar() {
   } catch (error) {}
   const handleLogout = () => {
     localStorage.clear();
-    // localStorage.removeItem("id");
   };
   useEffect(() => {
     try {
@@ -34,9 +27,6 @@ function Sidebar() {
         const querySnapshot = await getDocs(collection(db, "admin"));
         querySnapshot.forEach((doc) => {
           list.push({ id: doc.id, ...doc.data() });
-          // console.log(list[0]);
-
-          // doc.data() is never undefined for query doc snapshots
         });
         setData(list[0]);
       };
@@ -91,10 +81,13 @@ function Sidebar() {
           </li>
           <p className="titles">USEFUL</p>
 
-          <li>
-            <NotificationAddOutlinedIcon className="icon" />
-            <span>Notify</span>
-          </li>
+          <Link to="/notify" style={{ textDecoration: "none", color: "black" }}>
+            <li>
+              <NotificationAddOutlinedIcon className="icon" />
+              <span>Notify</span>
+            </li>
+          </Link>
+
           <li>
             <QueryStatsOutlinedIcon className="icon" />
             <span>Stats</span>

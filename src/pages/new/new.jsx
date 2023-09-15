@@ -27,9 +27,8 @@ function New() {
   const [Error1, setError1] = useState(false);
   const [Error2, setError2] = useState(false);
   const [Sent, setSent] = useState(false);
-  const [user, setUser] = useState({});
   const [percentage, setPercentage] = useState(null);
-  const navigate = useNavigate();
+  const [uploadingText, setuploadingText] = useState("");
 
   useEffect(() => {
     const uploadFile = () => {
@@ -42,25 +41,25 @@ function New() {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Observe state change events such as progress, pause, and resume
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setPercentage(progress);
-          console.log("Upload is " + progress + "% done");
+          setuploadingText("Upload is " + progress + "% done");
           switch (snapshot.state) {
             case "paused":
-              console.log("Upload is paused");
+              setuploadingText("Upload is Paused");
+
               break;
             case "running":
-              console.log("Upload is running");
+              // setuploadingText("Upload is Running");
+
               break;
             default:
               break;
           }
         },
         (error) => {
-          // Handle unsuccessful uploads
+          setuploadingText("Upload Failed");
           console.log(error);
         },
         () => {
@@ -88,7 +87,6 @@ function New() {
       return;
     } else {
       try {
-        // setUser({});
         const docRef = await addDoc(collection(db, "users"), {
           name: Name,
           contact: Contact,
@@ -105,7 +103,6 @@ function New() {
           timeStamp: new Date(),
         });
         setSent(true);
-        // navigate(-1);
         setTimeout(() => {
           setSent(false);
         }, 4000);
@@ -159,9 +156,10 @@ function New() {
                   <input
                     type="file"
                     id="file"
-                    style={{ display: "none" }}
+                    style={{ display: "none", paddingBottom: "1rem" }}
                     onChange={(e) => setFile(e.target.files[0])}
                   />
+                  <div className="messSucc">{uploadingText}</div>
                 </div>
                 <div className="formInput">
                   <label htmlFor="username">Username</label>
@@ -232,7 +230,7 @@ function New() {
                   disabled={percentage !== null && percentage < 100}
                   type="submit"
                 >
-                  Send
+                  Add
                 </button>
               </form>
             </div>

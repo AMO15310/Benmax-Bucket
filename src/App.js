@@ -23,6 +23,7 @@ import { AuthContext } from "./context/authContext";
 // } from "firebase/firestore";
 // import { db } from "./firebase-config";
 import Admin from "./components/admin/Admin";
+import Notify from "./pages/notify/notify";
 
 function App() {
   const { darkMode } = useContext(darkModeContext);
@@ -100,6 +101,14 @@ function App() {
             element={
               <RequireAuth>
                 <Admin />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/notify"
+            element={
+              <RequireAuth>
+                <Notify />
               </RequireAuth>
             }
           />

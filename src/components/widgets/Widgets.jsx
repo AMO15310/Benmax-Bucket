@@ -13,7 +13,7 @@ import { Construction } from "@mui/icons-material";
 
 const Widget = ({ type }) => {
   const [users, setUsers] = useState(null);
-  const [diff, setDiff] = useState(null);
+  const [diff, setDiff] = useState(0);
   const [bill, setBill] = useState(null);
   const [paid, setPaid] = useState(null);
   const [balance, setBalance] = useState(null);

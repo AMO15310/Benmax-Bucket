@@ -66,7 +66,6 @@ class Inputs extends Component {
     });
   };
   handleForm = (event) => {
-    // console.log("clicked");
     event.preventDefault();
     if (
       !this.state.name ||
@@ -85,23 +84,19 @@ class Inputs extends Component {
       userPassword: this.state.password,
       userConfirmationPass: this.state.confirm,
     };
-    console.log(details);
     createUserWithEmailAndPassword(
       auth,
       details.userEmail,
       details.userPassword
     )
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         this.setState({
           signed: user,
         });
-        // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
-        // ...
         this.setState({
           error: true,
           mess2: errorMessage,

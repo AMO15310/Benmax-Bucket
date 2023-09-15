@@ -1,5 +1,4 @@
 import React from "react";
-// import "./update.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
@@ -12,15 +11,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  addDoc,
-  setDoc,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import "./admin.scss";
 
@@ -44,8 +35,6 @@ const Admin = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Observe state change events such as progress, pause, and resume
-          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setPercentage(progress);
@@ -62,16 +51,11 @@ const Admin = () => {
           }
         },
         (error) => {
-          // Handle unsuccessful uploads
           console.log(error);
         },
         () => {
-          // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // setData((prev) => ({ ...prev, img:downloadURL }));
             setImage(downloadURL);
-            // setFile(downloadURL);
           });
         }
       );
@@ -152,7 +136,6 @@ const Admin = () => {
                   <input
                     type="text"
                     placeholder={Name}
-                    // value={Name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -166,7 +149,6 @@ const Admin = () => {
                 </div> */}
 
                 <button
-                  //   disabled={percentage !== null && percentage < 100}
                   type="submit"
                   disabled={percentage !== null && percentage < 100}
                 >

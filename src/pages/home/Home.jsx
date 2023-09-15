@@ -4,7 +4,7 @@ import Navbar from "../../components/navbar/Navbar";
 import Widget from "../../components/widgets/Widgets";
 import Featured from "../../components/featured/Featured";
 import Chart from "../../components/chart/Chart";
-import List from "../../components/table/Table";
+// import List from "../../components/table/Table";
 
 function Home() {
   return (
@@ -27,12 +27,12 @@ function Home() {
             <Featured />
             <Chart aspect={3 / 1} title="Users revenue last 6 months" />
           </div>
-          <div className="listContainer">
+          {/* <div className="listContainer">
             <div className="listTitle">Latest transactions</div>
             <div className="lists">
               <List />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
