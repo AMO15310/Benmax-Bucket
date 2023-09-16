@@ -6,6 +6,7 @@ import Chart from "../../components/chart/Chart";
 import "./profile.scss";
 import List from "../../components/table/Table";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import {
   collection,
   getDocs,
@@ -64,6 +65,45 @@ function Profile(props) {
 
   //           // doc.data() is never undefined for query doc snapshots
   //         });}
+  const notifyUser = () => {
+    const notificationMessage = `
+  Hello ${Name},
+
+  Your recent bill for meter number ${Meter} is ready for payment.
+
+  Amount: ${Amount} KES
+  Paid: ${Paid} KES
+  Balance: ${Balance} KES
+
+  Please ensure to make the payment at your earliest convenience.
+
+  Thank you,
+  Regards; Benmax 0722588147
+`;
+    const apiUrl = "https://api.mobitechtechnologies.com/sms/sendsms";
+
+    const requestBody = {
+      mobile: Phone,
+      response_type: "json",
+      sender_name: "Benmax",
+      service_id: 0,
+      message: notificationMessage,
+    };
+
+    const headers = {
+      h_api_key: "d225b671cb7118feee1e7539ef42bb45388e2b962a7f8277",
+      "Content-Type": "application/json",
+    };
+
+    axios
+      .post(apiUrl, JSON.stringify(requestBody), { headers, timeout: 5000 })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <div className="single">
@@ -119,6 +159,9 @@ function Profile(props) {
                   </div>
                 </div>
               </div>
+              <p onClick={notifyUser} className="notify-btn">
+                Notify
+              </p>
             </div>
             <div className="right">
               <Chart aspect={3 / 1} title="Users revenue last 6 months" />

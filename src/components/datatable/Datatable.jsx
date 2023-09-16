@@ -50,7 +50,7 @@ const Datatable = () => {
       renderCell: (params) => {
         return (
           <div className="cellAction ">
-            <Link
+            {/* <Link
               to=""
               style={{
                 textDecoration: "none",
@@ -65,7 +65,7 @@ const Datatable = () => {
               >
                 Notify
               </div>
-            </Link>
+            </Link> */}
             <Link to="/users/view" style={{ textDecoration: "none" }}>
               <div
                 className="viewButton"
